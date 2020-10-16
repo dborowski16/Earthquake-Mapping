@@ -78,19 +78,33 @@ function createMap(earthquakes) {
       accessToken: API_KEY
     });
 
+    var faultline = new L.LayerGroup();
+
+    var faultlineURL = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json"
+
+    d3.json(faultlineURL, function(data) {
+
+      L.geoJSON(data, {
+        style: function() {
+          return {color: "orange", fillOpacity: 0}
+        }
+      }).addTo(faultline)
+    })
+
     var baseMaps = {
         "Satelite Map": satelitemap,
         "Dark Map": darkmap
     }
 
     var overlayMaps = {
-        "Earthquakes": earthquakes
+        "Earthquakes": earthquakes,
+        "Faultlines": faultline
     };
 
     var myMap = L.map("map", {
         center: [0, 0],
         zoom: 2, 
-        layers: [satelitemap, earthquakes]
+        layers: [satelitemap, earthquakes, faultline]
     });
 
     var legend = L.control({ position: "bottomright" });
