@@ -72,8 +72,15 @@ function createMap(earthquakes) {
         accessToken: API_KEY
       });
 
+    var darkmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+      maxZoom: 18,
+      id: "mapbox.dark",
+      accessToken: API_KEY
+    });
+
     var baseMaps = {
-        "Satelite Map": satelitemap
+        "Satelite Map": satelitemap,
+        "Dark Map": darkmap
     }
 
     var overlayMaps = {
@@ -97,4 +104,9 @@ function createMap(earthquakes) {
     };
 
     legend.addTo(myMap);
+
+    L.control.layers(baseMaps, overlayMaps, {
+      collapsed: false
+    }).addTo(myMap);
+
 };
