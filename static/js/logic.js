@@ -37,11 +37,9 @@ function markerOpacity(magnitude) {
     return .30
   }
 }
-  // Assemble API query URL
-var url = baseURL;
 
 // Grab the data with d3
-d3.json(url, function(response) {
+d3.json(baseURL, function(response) {
 
     var earthquakes = L.geoJSON(response.features, {
         onEachFeature : addPopup,
@@ -62,8 +60,8 @@ function addMarker(features, latlng) {
     return L.circleMarker(latlng, options);
 }
 
-function addPopup(feature, layer) {
-    return layer.bindPopup(`<h3> ${feature.properties.place} </h3> <hr> <h4>Magnitude: ${feature.properties.mag} </h4> <p> ${Date(feature.properties.time)} </p>`);
+function addPopup(features, layer) {
+    return layer.bindPopup(`<h3> ${features.properties.place} </h3> <hr> <h4>Magnitude: ${features.properties.mag} </h4> <p> ${Date(features.properties.time)} </p>`);
 }
 
 function createMap(earthquakes) {
@@ -83,8 +81,8 @@ function createMap(earthquakes) {
     };
 
     var myMap = L.map("map", {
-        center: [37.09, -95.71],
-        zoom: 5, 
+        center: [0, 0],
+        zoom: 3, 
         layers: [satelitemap, earthquakes]
     });
 };
