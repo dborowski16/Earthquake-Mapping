@@ -15,4 +15,4 @@ In order the produce the interactive site, the following tools were used:
 The idea of tracking the earthquake locations throughout the world could be benificial to those who are responsible for emergency response and first aid.  This could also be of benefit for people who are looking to relocate and are concerened about techtonic acitivity in the area of interest.
 
 # Website Demo
-![Map Demo](https://github.com/cscaile/Polar_Bear_Habitat/blob/dave_borowski/demos/demo1.gif)
+![Map Demo](https://github.com/dborowski16/Earthquake-Mapping/blob/main/Images/demo.gif)
