@@ -1,6 +1,6 @@
 # Earthquake-Mapping
 
-![Map](https://github.com/cscaile/Polar_Bear_Habitat/blob/main/Images/polarbearimage1.jpg)
+![Map](https://github.com/dborowski16/Earthquake-Mapping/blob/main/Images/map.png)
 
 # Introduction
 The goal of this particular project was to source data from the USGS regarding earthquakes, their location, magnitude, and depth, etc., and to create a map visualization of that data for the end user.  The map should be such that it conveys the information in a way that tells magnitude by size of the dots, color, and opacity.  In this example, the data used from the USGS are 7 days worth of data, updated every minute.   
