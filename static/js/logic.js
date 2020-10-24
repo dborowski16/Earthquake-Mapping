@@ -64,17 +64,19 @@ function addPopup(features, layer) {
     return layer.bindPopup(`<h3> ${features.properties.place} </h3> <hr> <h4>Magnitude: ${features.properties.mag} </h4> <p> ${Date(features.properties.time)} </p>`);
 }
 
-function createMap(earthquakes) {
-    var satelitemap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-        attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-        maxZoom: 18,
-        id: "mapbox.satellite",
-        accessToken: API_KEY
-      });
+function createMap(earthquakes); {
 
-    var darkmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    var satelitemap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+      attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
       maxZoom: 18,
-      id: "mapbox.dark",
+      id: "mapbox.satellite",
+      accessToken: API_KEY
+    });
+
+    var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+      attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+      maxZoom: 18,
+      id: "dark-v10",
       accessToken: API_KEY
     });
 
@@ -86,7 +88,14 @@ function createMap(earthquakes) {
 
       L.geoJSON(data, {
         style: function() {
-          return {color: "orange", fillOpacity: 0}
+          return {color: "orange", _fillOpacity: 0,
+          get fillOpacity() {
+              return this._fillOpacity;
+            },
+          set fillOpacity(value) {
+              this._fillOpacity = value;
+            },
+}
         }
       }).addTo(faultline)
     })
@@ -94,7 +103,7 @@ function createMap(earthquakes) {
     var baseMaps = {
         "Satelite Map": satelitemap,
         "Dark Map": darkmap
-    }
+    };
 
     var overlayMaps = {
         "Earthquakes": earthquakes,
@@ -104,7 +113,7 @@ function createMap(earthquakes) {
     var myMap = L.map("map", {
         center: [0, 0],
         zoom: 2, 
-        layers: [satelitemap, earthquakes, faultline]
+        layers: [satelitemap, darkmap, earthquakes, faultline]
     });
 
     var legend = L.control({ position: "bottomright" });
