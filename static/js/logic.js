@@ -64,7 +64,7 @@ function addPopup(features, layer) {
     return layer.bindPopup(`<h3> ${features.properties.place} </h3> <hr> <h4>Magnitude: ${features.properties.mag} </h4> <p> ${Date(features.properties.time)} </p>`);
 }
 
-function createMap(earthquakes); {
+function createMap(earthquakes) {
 
     var satelitemap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
       attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
